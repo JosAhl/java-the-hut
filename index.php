@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/views/header.php';
+require __DIR__ . '/calendar.php';
 ?>
 
 
@@ -17,6 +18,13 @@ require __DIR__ . '/views/header.php';
             <option value="2">Standard</option>
             <option value="3">Luxury</option>
         </select>
+
+        <details>
+            <summary>Dates</summary>
+            <?php
+            echo $calendar->draw(date('2025-01-01'));
+            ?>
+        </details>
 
         <div class="box">
             <input type="checkbox" name="features" class="form-input" value="1">
