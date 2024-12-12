@@ -11,7 +11,6 @@ require __DIR__ . '/calendar.php';
         <input type="text" name="transferCode" class="form-input">
 
         <br>
-
         <label for="room" class="select-input">Room</label>
         <select name="room" class="form-input">
             <option value="1">Economy</option>
@@ -19,35 +18,35 @@ require __DIR__ . '/calendar.php';
             <option value="3">Luxury</option>
         </select>
 
-        <details>
-            <summary>Dates</summary>
-            <?php
-            echo $calendar->draw(date('2025-01-01'));
-            ?>
-        </details>
+        <section class="dates">
+            <label for="arrival">Arrival:</label>
+            <input type="date" name="arrival" required>
+            <label for="departure">Departure:</label>
+            <input type="date" name="departure" required>
+        </section>
 
         <div class="box">
-            <input type="checkbox" name="features" class="form-input" value="1">
+            <input type="checkbox" name="features[]" class="form-input" value="1">
             Sauna
         </div>
         <div class="box">
-            <input type="checkbox" name="features" class="form-input" value="2">
+            <input type="checkbox" name="features[]" class="form-input" value="2">
             Bicycle
         </div>
         <div class="box">
-            <input type="checkbox" name="features" class="form-input" value="3">
+            <input type="checkbox" name="features[]" class="form-input" value="3">
             Java bar
         </div>
         <div class="box">
-            <input type="checkbox" name="features" class="form-input" value="4">
+            <input type="checkbox" name="features[]" class="form-input" value="4">
             TV
         </div>
         <div class="box">
-            <input type="checkbox" name="features" class="form-input" value="5">
+            <input type="checkbox" name="features[]" class="form-input" value="5">
             Lightsaber
         </div>
         <div class="box">
-            <input type="checkbox" name="features" class="form-input" value="6">
+            <input type="checkbox" name="features[]" class="form-input" value="6">
             Car
         </div>
 
