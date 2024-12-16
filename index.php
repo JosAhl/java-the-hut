@@ -20,9 +20,9 @@ require __DIR__ . '/calendar.php';
 
         <section class="dates">
             <label for="arrival">Arrival:</label>
-            <input type="date" name="arrival" required>
+            <input type="date" name="arrival" min="2025-01-01" max="2025-01-31" required>
             <label for="departure">Departure:</label>
-            <input type="date" name="departure" required>
+            <input type="date" name="departure" min="2025-01-01" max="2025-01-31" required>
         </section>
 
         <div class="box">
