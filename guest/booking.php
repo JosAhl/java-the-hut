@@ -109,4 +109,48 @@ if (isset($_POST['transferCode'], $_POST['room'], $_POST['arrival'], $_POST['dep
     echo "Missing required booking information.";
 }
 
+/*---------------------------------------- Display booking details in HTML ----------------------------------------*/
+
+/*--- Fetch the room type ---*/
+$roomTypeQuery = $database->prepare('SELECT room_type FROM rooms WHERE room_id = :room_id');
+$roomTypeQuery->execute([':room_id' => $room]);
+$roomTypeResult = $roomTypeQuery->fetch(PDO::FETCH_ASSOC);
+$roomType = $roomTypeResult['room_type'] ?? 'Unknown Room Type';
+
+/*--- Display booking details ---*/
+?>
+
+<h1 class="success">Booking Successful!</h1>
+
+<p>You have booked the <strong><?php echo htmlspecialchars($roomType); ?></strong> room from
+    <strong><?php echo htmlspecialchars($arrival); ?></strong> to
+    <strong><?php echo htmlspecialchars($departure); ?></strong>.
+</p>
+
+<p>Selected Features:</p>
+
+<?php if (empty($features)) { ?>
+    <p>No additional features selected.</p>
+<?php } else {
+    /*--- Fetch selected feature names and prices ---*/
+    $selectedFeaturesQuery = $database->prepare('
+        SELECT features.feature_name, features.price 
+        FROM feature_selection
+        JOIN features ON feature_selection.feature_id = features.feature_id
+        WHERE feature_selection.booking_id = :booking_id
+    ');
+    $selectedFeaturesQuery->execute([':booking_id' => $bookingId]);
+    $selectedFeatures = $selectedFeaturesQuery->fetchAll(PDO::FETCH_ASSOC);
+
+    echo '<ul>';
+    foreach ($selectedFeatures as $feature) {
+        echo '<li>' . htmlspecialchars($feature['feature_name']) . ' - $' . htmlspecialchars($feature['price']) . ' per day</li>';
+    }
+    echo '</ul>';
+}
+?>
+
+<p><strong>Total Price:</strong> $<?php echo htmlspecialchars($totalPrice); ?></p>
+
+<?php
 require __DIR__ . '/../views/footer.php';
