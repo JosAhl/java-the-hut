@@ -5,7 +5,7 @@ require __DIR__ . '/../views/header.php';
 /*---------- Connect to database ----------*/
 $database = new PDO('sqlite:../database/yrgopelago-tatooine.db');
 
-if (isset($_POST['transferCode'], $_POST['room'], $_POST['arrival'], $_POST['departure'], $_POST['features'])) {
+if (isset($_POST['transferCode'], $_POST['room'], $_POST['arrival'], $_POST['departure'])) {
     try {
         /*--- Start a transaction ---*/
         $database->beginTransaction();
@@ -39,16 +39,58 @@ if (isset($_POST['transferCode'], $_POST['room'], $_POST['arrival'], $_POST['dep
         $days = $arrivalDate->diff($departureDate)->days;
 
         /*--- Insert selected features ---*/
-        $featureQuery = 'INSERT INTO feature_selection (booking_id, feature_id, days)
-                         VALUES (:bookingId, :featureId, :days)';
-        $featureStatement = $database->prepare($featureQuery);
+        if (!empty($features)) {
+            $featureQuery = 'INSERT INTO feature_selection (booking_id, feature_id, days)
+                             VALUES (:bookingId, :featureId, :days)';
+            $featureStatement = $database->prepare($featureQuery);
 
-        foreach ($features as $featureId) {
-            $featureStatement->bindParam(':bookingId', $bookingId, PDO::PARAM_INT);
-            $featureStatement->bindParam(':featureId', $featureId, PDO::PARAM_INT);
-            $featureStatement->bindParam(':days', $days, PDO::PARAM_INT);
-            $featureStatement->execute();
+            foreach ($features as $featureId) {
+                $featureStatement->bindParam(':bookingId', $bookingId, PDO::PARAM_INT);
+                $featureStatement->bindParam(':featureId', $featureId, PDO::PARAM_INT);
+                $featureStatement->bindParam(':days', $days, PDO::PARAM_INT);
+                $featureStatement->execute();
+            }
         }
+
+        /*--- Manually calculate total price ---*/
+        $roomPriceQuery = $database->prepare('
+            SELECT price_per_night * (julianday(:departure) - julianday(:arrival)) as room_price, 
+                price_per_night, (julianday(:departure) - julianday(:arrival)) as nights
+            FROM rooms 
+            WHERE room_id = :room_id
+        ');
+        $roomPriceQuery->execute([
+            ':departure' => $departure,
+            ':arrival' => $arrival,
+            ':room_id' => $room
+        ]);
+        $roomPriceResult = $roomPriceQuery->fetch(PDO::FETCH_ASSOC);
+
+        /*--- Calculate feature price (default to 0 if no features) ---*/
+        $featurePrice = 0;
+        if (!empty($features)) {
+            $featurePriceQuery = $database->prepare('
+                SELECT SUM(features.price * feature_selection.days) as feature_price
+                FROM feature_selection
+                JOIN features ON feature_selection.feature_id = features.feature_id
+                WHERE feature_selection.booking_id = :booking_id
+            ');
+            $featurePriceQuery->execute([':booking_id' => $bookingId]);
+            $featurePriceResult = $featurePriceQuery->fetch(PDO::FETCH_ASSOC);
+            $featurePrice = $featurePriceResult['feature_price'] ?? 0;
+        }
+
+        /*--- Update total price in the bookings table ---*/
+        $totalPrice = ($roomPriceResult['room_price'] ?? 0) + $featurePrice;
+        $manualUpdateQuery = $database->prepare('
+            UPDATE bookings 
+            SET total_price = :total_price 
+            WHERE booking_id = :booking_id
+        ');
+        $manualUpdateQuery->execute([
+            ':total_price' => $totalPrice,
+            ':booking_id' => $bookingId
+        ]);
 
         /*--- Commit the transaction ---*/
         $database->commit();
@@ -58,8 +100,6 @@ if (isset($_POST['transferCode'], $_POST['room'], $_POST['arrival'], $_POST['dep
         $statement->bindParam(':bookingId', $bookingId, PDO::PARAM_INT);
         $statement->execute();
         $guest = $statement->fetch(PDO::FETCH_ASSOC);
-
-        var_dump($guest);
     } catch (PDOException $e) {
         /*--- Cancel query if there is an error ---*/
         $database->rollBack();
