@@ -1,0 +1,14 @@
+.features {
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-info {
+    display: flex;
+    background-color: #ccc;
+}
+
+.feature-info img {
+    width: 10rem;
+    border-radius: 50%;
+}
