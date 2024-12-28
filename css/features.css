@@ -6,6 +6,7 @@
 .feature-info {
     display: flex;
     background-color: #ccc;
+    gap: 3rem;
 }
 
 .feature-info img {

@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@font-face {
+    font-family: 'Starjedi';
+    src: url('/assets/Starjedi.ttf');
+  }
+
+:root {
+    --font-size-xs: 0.75rem;                 /*--- 12px ---*/
+    --font-size-s: 1.125rem;                /*--- 18px ---*/
+    --font-size-m: 1.5rem;                  /*--- 24px ---*/
+    --font-size-l: 2rem;                  /*--- 32px ---*/
+    --font-size-xl: 2.5rem;                  /*--- 40px ---*/
+    --font-family-title: 'Starjedi';
+    --font-family-text: 'Orbitron';
+    --color-darkgray: #313131;
+    --color-lightgray: #555555;
+}
+
+body {
+    margin: 0 15rem;
+    padding: 0;
+}
