@@ -1,0 +1,20 @@
+footer {
+    font-family: var(--font-family-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.socials, .contact {
+    display: flex;
+    flex-direction: column;
+}
+
+.facebook-logo:hover, .twitter-logo:hover, .instagram-logo:hover {
+    color: #ff66ff;
+}
+
+.footer-button {
+    font-family: var(--font-family-title);   
+}
