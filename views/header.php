@@ -7,9 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/css/global.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
-    <link rel="stylesheet" type="text/css" href="/css/features.css">
+    <link rel="stylesheet" type="text/css" href="/css/welcome.css">
     <link rel="stylesheet" type="text/css" href="/css/rooms.css">
     <link rel="stylesheet" type="text/css" href="/css/calendar.css">
+    <link rel="stylesheet" type="text/css" href="/css/features.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
 </head>
 
@@ -25,7 +26,7 @@
         </section>
         <nav>
             <a href="/index.php">Hotel</a>
-            <a href="/booking.php">Reservation</a>
+            <a href="/features.php">Features</a>
             <a href="#">About</a>
         </nav>
     </header>

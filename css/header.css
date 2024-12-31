@@ -5,7 +5,8 @@ header {
 }
 
 h1 {
-    font-size: 3rem;
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-xl);
     margin: 0;
 }
 
@@ -14,7 +15,17 @@ h1 {
 }
 
 nav {
+    font-family: var(--font-family-text);
     display: flex;
     justify-content: space-between;
-    width: 13rem;
+    width: 15rem;
+}
+
+nav a {
+    color: var(--color-darkgray);
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
 }
