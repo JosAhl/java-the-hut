@@ -32,7 +32,7 @@
     <section class="payment">
         <img class="payment-1" src="/assets/mastercard.png">
         <img class="payment-2" src="/assets/visa.png">
-        <img class="payment-3" src="/assets/paypal.png">
+        <img class="payment-3" src="/assets/coin.png">
     </section>
 
 </footer>
