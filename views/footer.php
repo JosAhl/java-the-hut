@@ -16,17 +16,23 @@
 
     <section class="contact">
         <p class="footer-text">
-            Tatooine 55678-TWN
+            Java the Hut
+        </p>
+        <p class="contact-text">
+            Tatooine 55678-TWN <br>
+            +23 001 122 333 <br>
+            info@javahut.com
         </p>
         <button class="footer-button">
             Destination
         </button>
+        <img src="/assets/map.png" alt="Map of Tatooine">
     </section>
 
     <section class="payment">
-        <p>!</p>
-        <p>!</p>
-        <p>!</p>
+        <img class="payment-1" src="/assets/mastercard.png">
+        <img class="payment-2" src="/assets/visa.png">
+        <img class="payment-3" src="/assets/paypal.png">
     </section>
 
 </footer>
