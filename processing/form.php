@@ -3,7 +3,7 @@
 // Include header and autoload
 require __DIR__ . '/../views/header.php';
 require __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/availability.php';
+require __DIR__ . '/functions.php';
 
 /*---------- Connect to database ----------*/
 
