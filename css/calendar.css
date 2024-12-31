@@ -1,0 +1,33 @@
+/*--- Styling calendars on rooms.php ---*/
+
+.calendar {
+    border: solid 1px #000;
+}
+
+th {
+    font-family: var(--font-family-title);
+}
+
+.cal-day-box {
+    font-family: var(--font-family-text);
+    font-size: var(--font-size-xs);
+    text-align: center;
+}
+
+/*--- Styling booked dates on calendar ---*/
+
+.event-summary-row {
+    background-color: #808080;
+    color: transparent;
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.8;
+}
+
+.day {
+    position: relative;
+}
