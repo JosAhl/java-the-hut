@@ -1,0 +1,15 @@
+.welcome {
+    text-align: center;
+}
+
+.welcome h2 {
+    font-family: var(--font-family-title);
+}
+
+.welcome p {
+    font-family: var(--font-family-text);
+}
+
+.welcome img {
+    width: 100%;
+}

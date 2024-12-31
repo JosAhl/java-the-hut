@@ -1,6 +1,8 @@
+/*--- Styling display of rooms ---*/
+
 .room {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     background-color: #ccc;
     border: solid 1px #000;
@@ -21,18 +23,3 @@
 .room-info p {
     font-family: var(--font-family-text);
 }
-
-
-
-
-
-
-.calendar {
-    border: solid 1px #000;
-}
-
-/*
-.cal-day-box {
-    border: solid 1px #000;
-}
-*/

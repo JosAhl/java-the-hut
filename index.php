@@ -1,8 +1,10 @@
 <?php
 require __DIR__ . '/views/header.php';
+require __DIR__ . '/processing/calendar.php';
 ?>
 
-<section class="features">
+<section class="welcome">
+
     <h2>Welcome to Java the Hut</h2>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -12,74 +14,97 @@ require __DIR__ . '/views/header.php';
     </p>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png">
 
-    <h2>Prepare for your stay</h2>
+</section>
 
-    <section class="feature-info">
+<section class="booking-form">
 
-        <h3>Sauna</h3>
-        <img src="https://lumiere-a.akamaihd.net/v1/images/yodas-hut_a3d1133d.jpeg?region=0%2C117%2C1560%2C783" alt="Sauna">
+    <form action="/processing/form.php" method="post">
+        <label for="name" class="text-input">Name</label>
+        <input type="text" name="name" id="name" class="form-input">
+        <label for="transferCode" class="text-input">Transfercode</label>
+        <input type="text" name="transferCode" id="transferCode" class="form-input">
+
+        <br>
+        <label for="room" class="select-input">Room</label>
+        <select name="room" id="room" class="form-input">
+            <option value="1">Economy</option>
+            <option value="2">Standard</option>
+            <option value="3">Luxury</option>
+        </select>
+
+        <section class="dates">
+            <label for="arrival">Arrival:</label>
+            <input type="date" name="arrival" id="arrival" min="2025-01-01" max="2025-01-31" required>
+            <label for="departure">Departure:</label>
+            <input type="date" name="departure" id="departure" min="2025-01-01" max="2025-01-31" required>
+        </section>
+
+        <div class="box">
+            <input type="checkbox" name="features[]" class="form-input" value="1">
+            Sauna
+        </div>
+        <div class="box">
+            <input type="checkbox" name="features[]" class="form-input" value="2">
+            Bicycle
+        </div>
+        <div class="box">
+            <input type="checkbox" name="features[]" class="form-input" value="3">
+            Java bar
+        </div>
+        <div class="box">
+            <input type="checkbox" name="features[]" class="form-input" value="4">
+            TV
+        </div>
+        <div class="box">
+            <input type="checkbox" name="features[]" class="form-input" value="5">
+            Lightsaber
+        </div>
+        <div class="box">
+            <input type="checkbox" name="features[]" class="form-input" value="6">
+            Car
+        </div>
+
+        <button name="booking" type="submit" class="book-button">Book</button>
+    </form>
+
+</section>
+
+<section class="room-info">
+
+    <h3>Economy</h3>
+    <section class="room">
+        <img src="https://2book.se/wp-content/uploads/Star-wars.jpg" alt="Budget room" class="room">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-
+        <?php echo $calendarHTML1; ?>
     </section>
 
-    <section class="feature-info">
-        <h3>Bicycle</h3>
+    <h3>Standard</h3>
+    <section class="room">
+        <?php echo $calendarHTML2; ?>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <img src="https://www.blacksbricks.de/images/product_images/original_images/mandobikeis9.jpg" alt="Bicycle">
+        <img src="https://2book.se/wp-content/uploads/Star-wars.jpg" alt="Standard room" class="room">
     </section>
 
-    <section class="feature-info">
-        <h3>Java bar</h3>
-        <img src="https://images.fineartamerica.com/images/artworkimages/medium/2/jabba-the-hutt-jeremy-guerin.jpg" alt="Java bar">
+    <h3>Luxury</h3>
+    <section class="room">
+        <img src="https://2book.se/wp-content/uploads/Star-wars.jpg" alt="Luxury room" class="room">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-    </section>
-
-    <section class="feature-info">
-        <h3>TV</h3>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <img src="https://lumiere-a.akamaihd.net/v1/images/image_77ccbb93.jpeg?region=156%2C0%2C967%2C544" alt="TV hologram">
-    </section>
-
-    <section class="feature-info">
-        <h3>Lightsaber</h3>
-        <img src="https://assets-prd.ignimgs.com/2021/11/12/untitled-4-1636733283239.jpg" alt="Lightsaber">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-    </section>
-
-    <section class="feature-info">
-        <h3>Car</h3>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <img src="https://lumiere-a.akamaihd.net/v1/images/databank_podracer_01_169_89a8621d.jpeg?region=0%2C0%2C1560%2C780" alt="Car">
+        <?php echo $calendarHTML3; ?>
     </section>
 </section>
 
