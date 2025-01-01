@@ -1,12 +1,10 @@
 <?php
 
-// Include header and autoload
 require __DIR__ . '/../views/header.php';
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/functions.php';
 
 /*---------- Connect to database ----------*/
-
 $database = new PDO('sqlite:../database/yrgopelago-tatooine.db');
 
 if (isset($_POST['name'], $_POST['transferCode'], $_POST['room'], $_POST['arrival'], $_POST['departure'])) {
@@ -26,7 +24,7 @@ if (isset($_POST['name'], $_POST['transferCode'], $_POST['room'], $_POST['arriva
         if (!isRoomAvailable($database, $room, $arrival, $departure)) { ?>
             <h1 class="error">Booking Failed</h1>
             <p class="error-message">Selected dates are not available for this room. Please choose different dates.</p>
-        <?php
+<?php
             exit;
         }
 
@@ -64,87 +62,84 @@ if (isset($_POST['name'], $_POST['transferCode'], $_POST['room'], $_POST['arriva
         $totalPrice = ($roomPriceResult['room_price'] ?? 0) + $featurePrice;
 
         /*--- Validate transfer code with centralbank using Guzzle ---*/
-
-        /*--- If payment successful, proceed with booking ---*/
-        $bookingsQuery = 'INSERT INTO bookings (guest, transferCode, room_id, arrival, departure, total_price)
-                          VALUES (:guest, :transferCode, :room, :arrival, :departure, :total_price)';
-
-        $statement = $database->prepare($bookingsQuery);
-        $statement->execute([
-            ':guest' => $guest,
-            ':transferCode' => $transferCode,
-            ':room' => $room,
-            ':arrival' => $arrival,
-            ':departure' => $departure,
-            ':total_price' => $totalPrice
-        ]);
-
-        $bookingId = $database->lastInsertId();
-
-        /*--- Insert selected features ---*/
-        if (!empty($features)) {
-            $featureQuery = 'INSERT INTO feature_selection (booking_id, feature_id, days)
-                             VALUES (:bookingId, :featureId, :days)';
-            $featureStatement = $database->prepare($featureQuery);
-
-            foreach ($features as $featureId) {
-                $featureStatement->execute([
-                    ':bookingId' => $bookingId,
-                    ':featureId' => $featureId,
-                    ':days' => $days
-                ]);
-            }
+        if (!isValidUuid($transferCode)) {
+            echo json_encode(['error' => 'Invalid transfer code format.']);
+            exit;
         }
 
-        /*--- Commit the transaction ---*/
-        $database->commit();
+        /*--- Format the total price ---*/
+        $totalPrice = (float)number_format((float)$totalPrice, 2, '.', '');
+        error_log("Attempting validation with transferCode: {$transferCode} and totalcost: {$totalPrice}");
 
-        /*--- Display success message ---*/
-        $roomTypeQuery = $database->prepare('SELECT room_type FROM rooms WHERE room_id = :room_id');
-        $roomTypeQuery->execute([':room_id' => $room]);
-        $roomTypeResult = $roomTypeQuery->fetch(PDO::FETCH_ASSOC);
-        $roomType = $roomTypeResult['room_type'] ?? 'Unknown Room Type';
+        try {
+            if (!validateTransferCode($transferCode, $totalPrice)) {
+                echo json_encode(['error' => 'Invalid or already used transfer code. Please check your transfer code and try again.']);
+                exit;
+            }
 
-        /*--- Display booking confirmation ---*/
-        ?>
-        <h1 class="success">Booking Successful!</h1>
+            if (!processPayment($transferCode, "Josefine")) {
+                echo json_encode(['error' => 'Payment processing failed. Please try again or contact support.']);
+                exit;
+            }
 
-        <p>You have booked the <strong><?= htmlspecialchars($roomType) ?></strong> room from
-            <strong><?= htmlspecialchars($arrival) ?></strong> to
-            <strong><?= htmlspecialchars($departure) ?></strong>.
-        </p>
+            /*--- If valid details, proceed with booking ---*/
+            $bookingsQuery = 'INSERT INTO bookings (guest, transferCode, room_id, arrival, departure, total_price)
+                              VALUES (:guest, :transferCode, :room, :arrival, :departure, :total_price)';
+            $statement = $database->prepare($bookingsQuery);
+            $statement->execute([
+                ':guest' => $guest,
+                ':transferCode' => $transferCode,
+                ':room' => $room,
+                ':arrival' => $arrival,
+                ':departure' => $departure,
+                ':total_price' => $totalPrice
+            ]);
 
-        <p>Selected Features:</p>
+            $bookingId = $database->lastInsertId();
 
-        <?php if (empty($features)) : ?>
-            <p>No additional features selected.</p>
-        <?php else :
-            $selectedFeaturesQuery = $database->prepare('
-                SELECT features.feature_name, features.price 
-                FROM feature_selection
-                JOIN features ON feature_selection.feature_id = features.feature_id
-                WHERE feature_selection.booking_id = :booking_id
-            ');
-            $selectedFeaturesQuery->execute([':booking_id' => $bookingId]);
-            $selectedFeatures = $selectedFeaturesQuery->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-            <ul>
-                <?php foreach ($selectedFeatures as $feature) : ?>
-                    <li><?= htmlspecialchars($feature['feature_name']) ?> - $<?= htmlspecialchars($feature['price']) ?> per day</li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
+            /*--- Insert selected features ---*/
+            if (!empty($features)) {
+                $featureQuery = 'INSERT INTO feature_selection (booking_id, feature_id, days)
+                                 VALUES (:bookingId, :featureId, :days)';
+                $featureStatement = $database->prepare($featureQuery);
 
-        <p><strong>Total Price:</strong> $<?= htmlspecialchars($totalPrice) ?></p>
+                foreach ($features as $featureId) {
+                    $featureStatement->execute([
+                        ':bookingId' => $bookingId,
+                        ':featureId' => $featureId,
+                        ':days' => $days
+                    ]);
+                }
+            }
 
-    <?php
+            /*--- Commit the transaction ---*/
+            $database->commit();
+
+            /*--- Return success response as JSON ---*/
+            $response = [
+                'island' => 'Tatooine',
+                'hotel' => 'Java the Hut',
+                'arrival_date' => $arrivalDate->format('Y-m-d'),
+                'departure_date' => $departureDate->format('Y-m-d'),
+                'total_cost' => $totalPrice,
+                'stars' => '4',
+                'features' => $selectedFeatures,
+                'additional_info' => [
+                    'greeting' => 'Thank you for choosing Java the Hut',
+                    'imageUrl' => 'https://c.tenor.com/Ijo0JkXZnKMAAAAC/tenor.gif'
+                ]
+            ];
+
+            echo json_encode($response);
+        } catch (Exception $e) {
+            /*--- Rollback if any error occurs ---*/
+            $database->rollBack();
+            echo json_encode(['error' => 'Booking failed: ' . $e->getMessage()]);
+        }
     } catch (Exception $e) {
-        /*--- Cancel query if there is an error ---*/
+        /*--- Rollback if any error occurs in the beginning ---*/
         $database->rollBack();
-    ?>
-        <h1 class="error">Booking Failed</h1>
-        <p class="error-message"><?= htmlspecialchars($e->getMessage()) ?></p>
-<?php
+        echo json_encode(['error' => 'Booking failed: ' . $e->getMessage()]);
     }
 } else {
     echo "Missing required booking information.";
