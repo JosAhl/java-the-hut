@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 1.25rem;
+}
+
+.container {
+    width: 50rem;
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.25rem;
+}
+
+th, td {
+    padding: 0.6rem;
+    text-align: left;
+    border: 0.1rem solid #ddd;
+}
+
+th {
+    background-color: #eee;
+}
+
+.message {
+    padding: 0.6rem;
+    color: #155724;
+    margin-bottom: 1.25rem;
+}
+
+form {
+    display: inline;
+}
+
+.error {
+    color: red;
+    margin-bottom: 1.25rem;
+}
+
+.login-form {
+    width: 25rem;
+    margin: 0 auto;
+}
