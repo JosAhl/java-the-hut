@@ -1,111 +1,111 @@
 <?php
 
-declare(strict_types=1);
+require __DIR__ . '/../vendor/autoload.php';
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ClientException;
 
-/*---------- Function to check if transfercode is in correct format ----------*/
-
-function isValidUuid(string $uuid): bool
+function isValidUuid($uuid)
 {
-
-    if (!is_string($uuid) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $uuid) !== 1)) {
-        return false;
-    }
-
-    return true;
+    return preg_match('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/', $uuid);
 }
 
-/*---------- Function to check if dates are available ----------*/
-
-function isRoomAvailable(PDO $database, int $roomId, string $arrival, string $departure): bool
+function isRoomAvailable($database, $room, $arrival, $departure)
 {
     $query = $database->prepare('
-        SELECT COUNT(*) as booking_count
+        SELECT COUNT(*) AS count
         FROM bookings
         WHERE room_id = :room_id
-        AND (
-            (:arrival BETWEEN arrival AND DATE(departure, "-1 day"))
-            OR
-            (:departure BETWEEN DATE(arrival, "+1 day") AND departure)
-            OR
-            (arrival BETWEEN :arrival AND :departure)
-        )
+          AND (
+              (arrival <= :arrival AND departure > :arrival)
+              OR (arrival < :departure AND departure >= :departure)
+              OR (arrival >= :arrival AND departure <= :departure)
+          )
     ');
-
     $query->execute([
-        ':room_id' => $roomId,
+        ':room_id' => $room,
         ':arrival' => $arrival,
-        ':departure' => $departure
+        ':departure' => $departure,
     ]);
 
     $result = $query->fetch(PDO::FETCH_ASSOC);
-    return $result['booking_count'] === 0;
+    return $result['count'] == 0; /* Room is available if count is 0 */
 }
 
-/*---------- Function to validate transfer code with API ----------*/
-
-function validateTransferCode(string $transferCode, float $totalCost): bool
+function calculateTotalPrice($database, $room, $arrival, $departure, $features)
 {
-    $client = new Client([
-        'base_uri' => 'https://www.yrgopelago.se/centralbank/',
-        'timeout'  => 5.0,
+
+    /*--- Calculate room price ---*/
+    $roomPriceQuery = $database->prepare('
+        SELECT price_per_night * (julianday(:departure) - julianday(:arrival)) as room_price
+        FROM rooms 
+        WHERE room_id = :room_id
+    ');
+    $roomPriceQuery->execute([
+        ':departure' => $departure,
+        ':arrival' => $arrival,
+        ':room_id' => $room
     ]);
+    $roomPriceResult = $roomPriceQuery->fetch(PDO::FETCH_ASSOC);
+
+    /*--- Calculate number of days ---*/
+    $arrivalDate = new DateTime($arrival);
+    $departureDate = new DateTime($departure);
+    $days = $arrivalDate->diff($departureDate)->days;
+
+    /*--- Calculate feature prices ---*/
+    $featurePrice = 0;
+    if (!empty($features)) {
+        $featurePriceQuery = $database->prepare('
+            SELECT SUM(price) * :days as total_feature_price
+            FROM features
+            WHERE feature_id IN (' . str_repeat('?,', count($features) - 1) . '?)
+        ');
+        $featurePriceQuery->execute(array_merge([$days], $features));
+        $featurePriceResult = $featurePriceQuery->fetch(PDO::FETCH_ASSOC);
+        $featurePrice = $featurePriceResult['total_feature_price'] ?? 0;
+    }
+
+    return ($roomPriceResult['room_price'] ?? 0) + $featurePrice;
+}
+
+function checkTransferCode($bookingData)
+{
+    $transferCode = $bookingData['transfercode'];
+    $totalCost = $bookingData['totalcost'];
 
     try {
-        $response = $client->post('transferCode', [
-            'json' => [
+        $client = new GuzzleHttp\Client(['verify' => false]); /* Disable SSL verification */
+        $res = $client->request('POST', 'https://yrgopelago.se/centralbank/transferCode', [
+            'form_params' => [
                 'transferCode' => $transferCode,
                 'totalcost' => $totalCost
-            ],
-            'headers' => [
-                'Content-Type' => 'application/json'
             ]
         ]);
-
-        $body = (string) $response->getBody();
-        error_log("API Response: " . $body);
-
-        $result = json_decode($body, true);
-
-        if (isset($result['valid']) && $result['valid'] === true) {
-            return true;
-        } else {
-            error_log("Transfer code validation failed: " . json_encode($result));
-            return false;
-        }
-    } catch (GuzzleException $e) {
-        error_log("Guzzle error: " . $e->getMessage());
-        return false;
+        $body = $res->getBody();
+        return json_decode($body, true);
+    } catch (ClientException $e) {
+        $response = $e->getResponse();
+        $errorContent = $response->getBody()->getContents();
+        return json_decode($errorContent, true);
     }
 }
 
-function processPayment(string $transferCode, string $username): bool
+function processPayment($transferCode, $username)
 {
-    $client = new Client([
-        'base_uri' => 'https://www.yrgopelago.se/centralbank/',
-        'timeout'  => 5.0,
-    ]);
-
     try {
-        /*--- JSON format ---*/
-        $response = $client->post('deposit', [
-            'json' => [
+        $client = new GuzzleHttp\Client(['verify' => false]); /* Disable SSL verification */
+        $res = $client->request('POST', 'https://yrgopelago.se/centralbank/deposit', [
+            'form_params' => [
                 'user' => $username,
-                'transferCode' => $transferCode
-            ],
-            'headers' => [
-                'Content-Type' => 'application/json'
+                'transferCode' => $transferCode,
+                'numberOfDays' => 3
             ]
         ]);
-
-        $body = (string) $response->getBody();
-        $result = json_decode($body, true);
-
-        return isset($result['message']) && strpos(strtolower($result['message']), 'success') !== false;
-    } catch (GuzzleException $e) {
-        error_log("Payment processing error: " . $e->getMessage());
+        $body = $res->getBody();
+        $responseBody = json_decode($body, true);
+        return isset($responseBody['status']) && $responseBody['status'] === 'success';
+    } catch (ClientException $e) {
+        error_log('Error processing payment: ' . $e->getMessage());
         return false;
     }
 }

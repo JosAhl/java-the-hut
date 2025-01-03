@@ -64,6 +64,7 @@ require __DIR__ . '/processing/calendar.php';
             Car
         </div>
 
+        <input type="hidden" name="response_format" value="json">
         <button name="booking" type="submit" class="book-button">Book</button>
     </form>
 
