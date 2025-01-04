@@ -1,5 +1,6 @@
 .welcome {
     text-align: center;
+    color: var(--color-white);
 }
 
 .welcome h2 {

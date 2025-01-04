@@ -2,10 +2,11 @@
 
 footer {
     font-family: var(--font-family-text);
+    color: var(--color-white);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem 0;
+    margin: 5rem 0 1rem 0;
 }
 
 /*--- Flex on each footer section ---*/
@@ -24,7 +25,7 @@ footer {
 /*--- Socials ---*/
 
 .facebook-logo:hover, .twitter-logo:hover, .instagram-logo:hover {
-    color: #ff66ff;
+    color: var(--color-lightgray);
 }
 
 /*--- Contacts ---*/

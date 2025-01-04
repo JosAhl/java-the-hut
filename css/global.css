@@ -12,11 +12,17 @@
     --font-size-xl: 2.5rem;                  /*--- 40px ---*/
     --font-family-title: 'Starjedi';
     --font-family-text: 'Orbitron';
+    --color-white: #ffffff;
     --color-darkgray: #313131;
     --color-lightgray: #555555;
+    --color-black: #000000;
 }
 
 body {
+    background-image: url('/assets/background.png');
+    background-repeat: no-repeat;
+    background-size: 100vw;
+    background-color: var(--color-black);
     margin: 0 15rem;
     padding: 0;
 }

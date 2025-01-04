@@ -1,6 +1,7 @@
 /*--- Styling calendars on rooms.php ---*/
 
 .calendar {
+    color: var(--color-white);
     border: solid 1px #000;
 }
 

@@ -4,8 +4,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #ccc;
-    border: solid 1px #000;
+    border: solid 0.1rem #fff;
     gap: 3rem;
 }
 
@@ -16,10 +15,12 @@
 .room-info h3 {
     font-family: var(--font-family-title);
     font-size: var(--font-size-l);
+    color: var(--color-white);
     text-align: center;
     margin: 1rem 0 0;
 }
 
 .room-info p {
     font-family: var(--font-family-text);
+    color: var(--color-white);
 }
