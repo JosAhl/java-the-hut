@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require __DIR__ . '/../vendor/autoload.php';
 
 use GuzzleHttp\Exception\ClientException;
@@ -81,7 +83,7 @@ function checkTransferCode($bookingData)
                 'totalcost' => $totalCost
             ]
         ]);
-        $body = $res->getBody();
+        $body = (string) $res->getBody();
         return json_decode($body, true);
     } catch (ClientException $e) {
         $response = $e->getResponse();
@@ -101,7 +103,7 @@ function processPayment($transferCode, $username)
                 'numberOfDays' => 3
             ]
         ]);
-        $body = $res->getBody();
+        $body = (string) $res->getBody();
         $responseBody = json_decode($body, true);
         return isset($responseBody['status']) && $responseBody['status'] === 'success';
     } catch (ClientException $e) {
