@@ -5,11 +5,21 @@
 
 .feature-info {
     display: flex;
-    background-color: #ccc;
+    align-items: center;
     gap: 3rem;
 }
 
 .feature-info img {
     width: 10rem;
     border-radius: 50%;
+}
+
+h3 {
+    font-family: var(--font-family-title);
+    color: var(--color-white);
+}
+
+p {
+    font-family: var(--font-family-text);
+    color: var(--color-white);
 }

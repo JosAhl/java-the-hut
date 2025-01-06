@@ -26,11 +26,11 @@ require __DIR__ . '/views/header.php';
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <img src="https://www.blacksbricks.de/images/product_images/original_images/mandobikeis9.jpg" alt="Bicycle">
+        <img src="/assets/bike2x.png" alt="Bicycle">
     </section>
 
     <section class="feature-info">
-        <h3>Java bar</h3>
+        <h3>Javabar</h3>
         <img src="https://images.fineartamerica.com/images/artworkimages/medium/2/jabba-the-hutt-jeremy-guerin.jpg" alt="Java bar">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -48,12 +48,12 @@ require __DIR__ . '/views/header.php';
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <img src="https://lumiere-a.akamaihd.net/v1/images/image_77ccbb93.jpeg?region=156%2C0%2C967%2C544" alt="TV hologram">
+        <img src="/assets/tv2x.png" alt="TV hologram">
     </section>
 
     <section class="feature-info">
         <h3>Lightsaber</h3>
-        <img src="https://assets-prd.ignimgs.com/2021/11/12/untitled-4-1636733283239.jpg" alt="Lightsaber">
+        <img src="/assets/lightsaber2x.png" alt="Lightsaber">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -70,7 +70,7 @@ require __DIR__ . '/views/header.php';
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <img src="https://lumiere-a.akamaihd.net/v1/images/databank_podracer_01_169_89a8621d.jpeg?region=0%2C0%2C1560%2C780" alt="Car">
+        <img src="/assets/podracer2x.png" alt="Car">
     </section>
 </section>
 
