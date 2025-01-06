@@ -82,7 +82,7 @@ require __DIR__ . '/processing/calendar.php';
 
     <h3>Economy</h3>
     <section class="room">
-        <img src="https://2book.se/wp-content/uploads/Star-wars.jpg" alt="Budget room" class="room">
+        <img src="/assets/economy.png" alt="Budget room" class="room">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -94,7 +94,7 @@ require __DIR__ . '/processing/calendar.php';
 
     <h3>Standard</h3>
     <section class="room">
-        <img src="https://2book.se/wp-content/uploads/Star-wars.jpg" alt="Standard room" class="room">
+        <img src="/assets/standard.png" alt="Standard room" class="room">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -106,7 +106,7 @@ require __DIR__ . '/processing/calendar.php';
 
     <h3>Luxury</h3>
     <section class="room">
-        <img src="https://2book.se/wp-content/uploads/Star-wars.jpg" alt="Luxury room" class="room">
+        <img src="/assets/luxury.png" alt="Luxury room" class="room">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
