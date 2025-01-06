@@ -1,0 +1,46 @@
+.booking-form {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    align-items: center; /* Centers the button vertically */
+    flex-direction: column; /* Stacks items vertically */
+}
+
+h1, label, .box {
+    color: var(--color-white);
+}
+
+label, .box {
+    font-family: var(--font-family-text);
+}
+
+.form-title, .form-guest, .dates, .form-room {
+    text-align: center;
+    margin: 1rem;
+}
+
+/*--- Input font and padding ---*/
+#name, #transferCode, #arrival, #departure, #room.form-input {
+    font-family: var(--font-family-text);
+    padding: 0.25rem;
+}
+
+/*--- Features displayed 3 by 2 and centered ---*/
+.feature-box {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    width: 60%;
+    margin: 1.25rem auto;
+    gap: 0.5rem;
+}
+
+.box {
+    min-width: 100px;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-button {
+    font-family: var(--font-family-title);
+    text-align: center;
+}

@@ -26,6 +26,14 @@ require __DIR__ . '/processing/calendar.php';
             <input type="text" name="transferCode" id="transferCode" class="form-input">
         </section>
 
+
+        <section class="dates">
+            <label for="arrival">Arrival:</label>
+            <input type="date" name="arrival" id="arrival" min="2025-01-01" max="2025-01-31" required>
+            <label for="departure">Departure:</label>
+            <input type="date" name="departure" id="departure" min="2025-01-01" max="2025-01-31" required>
+        </section>
+
         <section class="form-room">
             <label for="room" class="select-input">Room</label>
             <select name="room" id="room" class="form-input">
@@ -35,40 +43,37 @@ require __DIR__ . '/processing/calendar.php';
             </select>
         </section>
 
-        <section class="dates">
-            <label for="arrival">Arrival:</label>
-            <input type="date" name="arrival" id="arrival" min="2025-01-01" max="2025-01-31" required>
-            <label for="departure">Departure:</label>
-            <input type="date" name="departure" id="departure" min="2025-01-01" max="2025-01-31" required>
+        <section class="feature-box">
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="1">
+                Sauna
+            </div>
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="2">
+                Bicycle
+            </div>
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="3">
+                Java bar
+            </div>
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="4">
+                TV
+            </div>
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="5">
+                Lightsaber
+            </div>
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="6">
+                Car
+            </div>
         </section>
 
-        <div class="box">
-            <input type="checkbox" name="features[]" class="form-input" value="1">
-            Sauna
-        </div>
-        <div class="box">
-            <input type="checkbox" name="features[]" class="form-input" value="2">
-            Bicycle
-        </div>
-        <div class="box">
-            <input type="checkbox" name="features[]" class="form-input" value="3">
-            Java bar
-        </div>
-        <div class="box">
-            <input type="checkbox" name="features[]" class="form-input" value="4">
-            TV
-        </div>
-        <div class="box">
-            <input type="checkbox" name="features[]" class="form-input" value="5">
-            Lightsaber
-        </div>
-        <div class="box">
-            <input type="checkbox" name="features[]" class="form-input" value="6">
-            Car
-        </div>
-
         <input type="hidden" name="response_format" value="json">
-        <button name="booking" type="submit" class="book-button">Book</button>
+        <section class="book-button">
+            <button name="booking" type="submit" class="book-button">Book</button>
+        </section>
     </form>
 
 </section>

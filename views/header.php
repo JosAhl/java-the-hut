@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/global.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/welcome.css">
+    <link rel="stylesheet" type="text/css" href="/css/form.css">
     <link rel="stylesheet" type="text/css" href="/css/rooms.css">
     <link rel="stylesheet" type="text/css" href="/css/calendar.css">
     <link rel="stylesheet" type="text/css" href="/css/features.css">
