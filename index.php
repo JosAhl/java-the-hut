@@ -46,35 +46,35 @@ require __DIR__ . '/processing/calendar.php';
         <section class="feature-box">
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="1">
-                Bathtub <img src="/assets/coin.png" alt="Coin" class="cost-img">1/night
+                1 /night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Bathtub
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="2">
-                Pool <img src="/assets/coin.png" alt="Coin" class="cost-img">2/night
+                2/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Pool
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="3">
-                Bicycle <img src="/assets/coin.png" alt="Coin" class="cost-img">2/night
+                2/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Bicycle
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="4">
-                Superior bar <img src="/assets/coin.png" alt="Coin" class="cost-img">4/night
+                4/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Superior bar
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="5">
-                TV <img src="/assets/coin.png" alt="Coin" class="cost-img">4/night
+                4/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> TV
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="6">
-                Lightsaber <img src="/assets/coin.png" alt="Coin" class="cost-img">5/night
+                5/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Lightsaber
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="7">
-                Car <img src="/assets/coin.png" alt="Coin" class="cost-img">5/night
+                5/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Car
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="8">
-                Rubiks Cube <img src="/assets/coin.png" alt="Coin" class="cost-img">5/night
+                5/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Rubiks Cube
             </div>
         </section>
 
@@ -92,10 +92,9 @@ require __DIR__ . '/processing/calendar.php';
     <section class="room">
         <img src="/assets/economy.png" alt="Budget room" class="room">
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            This cozy mud hut offers rustic charm with its earthy clay walls, warm ambient lighting, and essential furnishings.
+            Including a view of moisture farms and sandstorms at no extra charge this hut is perfect for travelers seeking
+            simplicity and an authentic experience.
         </p>
         <?php echo $calendarHTML1; ?>
     </section>
@@ -104,10 +103,9 @@ require __DIR__ . '/processing/calendar.php';
     <section class="room">
         <img src="/assets/standard.png" alt="Standard room" class="room">
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Enjoy a modest yet comfortable stay in our advanced mud hut. Featuring polished clay walls, soft linens, and
+            glowing sconces, this room blends rustic charm with subtle modern conveniences. Ideal for guests who appreciate
+            a balance of tradition and comfort.
         </p>
         <?php echo $calendarHTML2; ?>
     </section>
@@ -116,10 +114,9 @@ require __DIR__ . '/processing/calendar.php';
     <section class="room">
         <img src="/assets/luxury.png" alt="Luxury room" class="room">
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Who says luxury can't be found on Tatooine? Our luxury space tower suite sits atop a well-known sand dune with the most
+            exclusive view of the twin suns setting. Perfect for stargazing and maybe a little quiet contemplation high above the
+            frequent sandstorms.
         </p>
         <?php echo $calendarHTML3; ?>
     </section>
