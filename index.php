@@ -37,36 +37,44 @@ require __DIR__ . '/processing/calendar.php';
         <section class="form-room">
             <label for="room" class="select-input">Room</label>
             <select name="room" id="room" class="form-input">
-                <option value="1">Economy</option>
-                <option value="2">Standard</option>
-                <option value="3">Luxury</option>
+                <option value="1">Economy | 1/night</option>
+                <option value="2">Standard | 2/night</option>
+                <option value="3">Luxury | 4/night</option>
             </select>
         </section>
 
         <section class="feature-box">
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="1">
-                Sauna
+                Bathtub <img src="/assets/coin.png" alt="Coin" class="cost-img">1/night
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="2">
-                Bicycle
+                Pool <img src="/assets/coin.png" alt="Coin" class="cost-img">2/night
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="3">
-                Java bar
+                Bicycle <img src="/assets/coin.png" alt="Coin" class="cost-img">2/night
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="4">
-                TV
+                Superior bar <img src="/assets/coin.png" alt="Coin" class="cost-img">4/night
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="5">
-                Lightsaber
+                TV <img src="/assets/coin.png" alt="Coin" class="cost-img">4/night
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="6">
-                Car
+                Lightsaber <img src="/assets/coin.png" alt="Coin" class="cost-img">5/night
+            </div>
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="7">
+                Car <img src="/assets/coin.png" alt="Coin" class="cost-img">5/night
+            </div>
+            <div class="box">
+                <input type="checkbox" name="features[]" class="form-input" value="8">
+                Rubiks Cube <img src="/assets/coin.png" alt="Coin" class="cost-img">5/night
             </div>
         </section>
 

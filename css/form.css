@@ -1,10 +1,11 @@
 .booking-form {
     display: flex;
-    justify-content: center; /* Centers the button horizontally */
-    align-items: center; /* Centers the button vertically */
-    flex-direction: column; /* Stacks items vertically */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
+/*--- Form text styling ---*/
 h1, label, .box {
     color: var(--color-white);
 }
@@ -24,11 +25,11 @@ label, .box {
     padding: 0.25rem;
 }
 
-/*--- Features displayed 3 by 2 and centered ---*/
+/*--- Features displayed 4 by 2 and centered ---*/
 .feature-box {
     display: grid !important;
-    grid-template-columns: 1fr 1fr 1fr !important;
-    width: 60%;
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
+    width: 100%;
     margin: 1.25rem auto;
     gap: 0.5rem;
 }
@@ -40,7 +41,14 @@ label, .box {
     justify-content: center;
 }
 
+/*--- Coin by feature selection ---*/
+.cost-img {
+    width: 1rem;
+}
+
+/*--- Book button styling ---*/
 .book-button {
     font-family: var(--font-family-title);
+    font-size: var(--font-size-m);
     text-align: center;
 }
