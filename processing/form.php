@@ -73,16 +73,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $bookingId = $database->lastInsertId();
 
             /*--- Insert selected features ---*/
-            if (!empty($bookingData['features'])) {
+            if (!empty($features)) {
+
+                $arrivalDate = new DateTime($arrival);
+                $departureDate = new DateTime($departure);
+                $interval = $arrivalDate->diff($departureDate);
+                $numberOfDays = $interval->days;
+
                 $featureQuery = 'INSERT INTO feature_selection (booking_id, feature_id, days)
                                  VALUES (:bookingId, :featureId, :days)';
                 $featureStatement = $database->prepare($featureQuery);
 
-                foreach ($bookingData['features'] as $featureId) {
+                foreach ($features as $featureId) {
                     $featureStatement->execute([
                         ':bookingId' => $bookingId,
                         ':featureId' => $featureId,
-                        ':days' => $bookingData['days']
+                        ':days' => $numberOfDays
                     ]);
                 }
             }
