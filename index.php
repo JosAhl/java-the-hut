@@ -46,35 +46,35 @@ require __DIR__ . '/processing/calendar.php';
         <section class="feature-box">
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="1">
-                1 /night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Bathtub
+                1<img src="/assets/coin.png" alt="Coin" class="cost-img"> Bathtub
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="2">
-                2/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Pool
+                2<img src="/assets/coin.png" alt="Coin" class="cost-img"> Pool
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="3">
-                2/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Bicycle
+                2<img src="/assets/coin.png" alt="Coin" class="cost-img"> Bicycle
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="4">
-                4/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Superior bar
+                4<img src="/assets/coin.png" alt="Coin" class="cost-img"> Superior bar
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="5">
-                4/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> TV
+                4<img src="/assets/coin.png" alt="Coin" class="cost-img"> TV
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="6">
-                5/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Lightsaber
+                5<img src="/assets/coin.png" alt="Coin" class="cost-img"> Lightsaber
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="7">
-                5/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Car
+                5<img src="/assets/coin.png" alt="Coin" class="cost-img"> Car
             </div>
             <div class="box">
                 <input type="checkbox" name="features[]" class="form-input" value="8">
-                5/night<img src="/assets/coin.png" alt="Coin" class="cost-img"> Rubiks Cube
+                5<img src="/assets/coin.png" alt="Coin" class="cost-img"> Rubiks Cube
             </div>
         </section>
 
