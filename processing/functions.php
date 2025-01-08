@@ -84,6 +84,21 @@ function getFeatures()
     }
 }
 
+/*-------------------- Function to fetch rooms to display on index --------------------*/
+function getRooms()
+{
+    try {
+        $db = new PDO('sqlite:' . __DIR__ . '/../database/yrgopelago-tatooine.db');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $rooms = $db->query("SELECT * FROM rooms ORDER BY room_id")->fetchAll(PDO::FETCH_ASSOC);
+        return $rooms;
+    } catch (PDOException $e) {
+        /* Return empty array if database connection fails */
+        return [];
+    }
+}
+
 /*-------------------- Function to fetch transfercode endpoint --------------------*/
 function checkTransferCode($bookingData)
 {

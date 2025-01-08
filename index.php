@@ -2,6 +2,7 @@
 require __DIR__ . '/views/header.php';
 require __DIR__ . '/processing/calendar.php';
 require __DIR__ . '/processing/functions.php';
+$rooms = getRooms();
 $features = getFeatures();
 ?>
 
@@ -39,9 +40,11 @@ $features = getFeatures();
         <section class="form-room">
             <label for="room" class="select-input">Room</label>
             <select name="room" id="room" class="form-input">
-                <option value="1">Economy | 1/night</option>
-                <option value="2">Standard | 2/night</option>
-                <option value="3">Luxury | 4/night</option>
+                <?php foreach ($rooms as $room): ?>
+                    <option value="<?php echo htmlspecialchars($room['room_id']); ?>">
+                        <?php echo htmlspecialchars($room['room_type']); ?> | <?php echo htmlspecialchars($room['price_per_night']); ?>/night
+                    </option>
+                <?php endforeach; ?>
             </select>
         </section>
 
