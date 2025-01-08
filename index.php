@@ -21,7 +21,7 @@ $features = getFeatures();
 <section class="booking-form">
     <h1 class="form-title">Book</h1>
 
-    <form action="/processing/form.php" method="post">
+    <form action="./processing/form.php" method="post">
         <section class="form-guest">
             <label for="name" class="text-input">Name</label>
             <input type="text" name="name" id="name" class="form-input">
@@ -53,7 +53,7 @@ $features = getFeatures();
                 <div class="box">
                     <input type="checkbox" name="features[]" class="form-input" value="<?php echo htmlspecialchars($feature['feature_id']); ?>">
                     <?php echo htmlspecialchars($feature['price']); ?>
-                    <img src="/assets/coin.png" alt="Coin" class="cost-img">
+                    <img src="./assets/coin.png" alt="Coin" class="cost-img">
                     <?php echo htmlspecialchars($feature['feature_name']); ?>
                 </div>
             <?php endforeach; ?>
@@ -71,7 +71,7 @@ $features = getFeatures();
 
     <h3>Economy</h3>
     <section class="room">
-        <img src="/assets/economy.png" alt="Budget room" class="room">
+        <img src="./assets/economy.png" alt="Budget room" class="room">
         <p>
             This cozy mud hut offers rustic charm with its earthy clay walls, warm ambient lighting, and essential furnishings.
             Including a view of moisture farms and sandstorms at no extra charge this hut is perfect for travelers seeking
@@ -82,7 +82,7 @@ $features = getFeatures();
 
     <h3>Standard</h3>
     <section class="room">
-        <img src="/assets/standard.png" alt="Standard room" class="room">
+        <img src="./assets/standard.png" alt="Standard room" class="room">
         <p>
             Enjoy a modest yet comfortable stay in our advanced mud hut. Featuring polished clay walls, soft linens, and
             glowing sconces, this room blends rustic charm with subtle modern conveniences. Ideal for guests who appreciate
@@ -93,7 +93,7 @@ $features = getFeatures();
 
     <h3>Luxury</h3>
     <section class="room">
-        <img src="/assets/luxury.png" alt="Luxury room" class="room">
+        <img src="./assets/luxury.png" alt="Luxury room" class="room">
         <p>
             Who says luxury can't be found on Tatooine? Our luxury space tower suite sits atop a well-known sand dune with the most
             exclusive view of the twin suns setting. Perfect for stargazing and maybe a little quiet contemplation high above the
