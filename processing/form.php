@@ -73,26 +73,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $bookingId = $database->lastInsertId();
 
             /*--- Insert selected features ---*/
+            $selectedFeatures = [];
             if (!empty($features)) {
+                $featureQuery = $database->prepare('
+            SELECT feature_id, feature_name, price 
+            FROM features 
+            WHERE feature_id IN (' . str_repeat('?,', count($features) - 1) . '?)
+        ');
+                $featureQuery->execute($features);
+                $selectedFeatures = $featureQuery->fetchAll(PDO::FETCH_ASSOC);
 
-                $arrivalDate = new DateTime($arrival);
-                $departureDate = new DateTime($departure);
-                $interval = $arrivalDate->diff($departureDate);
-                $numberOfDays = $interval->days;
-
-                $featureQuery = 'INSERT INTO feature_selection (booking_id, feature_id, days)
-                                 VALUES (:bookingId, :featureId, :days)';
-                $featureStatement = $database->prepare($featureQuery);
+                $featureInsertQuery = 'INSERT INTO feature_selection (booking_id, feature_id)
+                                VALUES (:bookingId, :featureId)';
+                $featureStatement = $database->prepare($featureInsertQuery);
 
                 foreach ($features as $featureId) {
                     $featureStatement->execute([
                         ':bookingId' => $bookingId,
-                        ':featureId' => $featureId,
-                        ':days' => $numberOfDays
+                        ':featureId' => $featureId
                     ]);
                 }
             }
 
+            /*--- JSON response for successful booking ---*/
             $_SESSION['messages'][] = 'Booking successfully completed!';
             if ($responseFormat) {
                 header('Content-Type: application/json');
@@ -106,7 +109,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'departure_date' => $departure,
                         'total_cost' => $totalPrice,
                         'stars' => '4',
-                        'features' => $features,
+                        'selected_features' => array_map(function ($feature) {
+                            return [
+                                'feature' => $feature['feature_name'],
+                                'price' => $feature['price']
+                            ];
+                        }, $selectedFeatures),
                         'additional_info' => [
                             'greeting' => 'Thank you for choosing Java the Hut',
                             'imageUrl' => 'https://c.tenor.com/Ijo0JkXZnKMAAAAC/tenor.gif'
@@ -117,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: /');
             }
         } else {
+            /*--- JSON response for failed booking ---*/
             $_SESSION['errors'][] = 'Something went wrong. Please try again.';
             if ($responseFormat) {
                 header('Content-Type: application/json');

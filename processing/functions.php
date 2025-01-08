@@ -6,11 +6,14 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use GuzzleHttp\Exception\ClientException;
 
+/*-------------------- Function to check valid transfercode format --------------------*/
+
 function isValidUuid($uuid)
 {
     return preg_match('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/', $uuid);
 }
 
+/*-------------------- Function to check valid available dates --------------------*/
 function isRoomAvailable($database, $room, $arrival, $departure)
 {
     $query = $database->prepare('
@@ -33,6 +36,7 @@ function isRoomAvailable($database, $room, $arrival, $departure)
     return $result['count'] == 0; /* Room is available if count is 0 */
 }
 
+/*-------------------- Function to check total cost --------------------*/
 function calculateTotalPrice($database, $room, $arrival, $departure, $features)
 {
 
@@ -49,20 +53,15 @@ function calculateTotalPrice($database, $room, $arrival, $departure, $features)
     ]);
     $roomPriceResult = $roomPriceQuery->fetch(PDO::FETCH_ASSOC);
 
-    /*--- Calculate number of days ---*/
-    $arrivalDate = new DateTime($arrival);
-    $departureDate = new DateTime($departure);
-    $days = $arrivalDate->diff($departureDate)->days;
-
     /*--- Calculate feature prices ---*/
     $featurePrice = 0;
     if (!empty($features)) {
         $featurePriceQuery = $database->prepare('
-            SELECT SUM(price) * :days as total_feature_price
+            SELECT SUM(price) as total_feature_price
             FROM features
             WHERE feature_id IN (' . str_repeat('?,', count($features) - 1) . '?)
         ');
-        $featurePriceQuery->execute(array_merge([$days], $features));
+        $featurePriceQuery->execute(array_merge($features));
         $featurePriceResult = $featurePriceQuery->fetch(PDO::FETCH_ASSOC);
         $featurePrice = $featurePriceResult['total_feature_price'] ?? 0;
     }
@@ -70,6 +69,7 @@ function calculateTotalPrice($database, $room, $arrival, $departure, $features)
     return ($roomPriceResult['room_price'] ?? 0) + $featurePrice;
 }
 
+/*-------------------- Function to fetch transfercode endpoint --------------------*/
 function checkTransferCode($bookingData)
 {
     $transferCode = $bookingData['transfercode'];
@@ -92,6 +92,7 @@ function checkTransferCode($bookingData)
     }
 }
 
+/*-------------------- Function to fetch deposit endpoint --------------------*/
 function processPayment($transferCode, $username)
 {
     try {
