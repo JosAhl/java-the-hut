@@ -69,6 +69,21 @@ function calculateTotalPrice($database, $room, $arrival, $departure, $features)
     return ($roomPriceResult['room_price'] ?? 0) + $featurePrice;
 }
 
+/*-------------------- Function to fetch features to display on index --------------------*/
+function getFeatures()
+{
+    try {
+        $db = new PDO('sqlite:' . __DIR__ . '/../database/yrgopelago-tatooine.db');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $features = $db->query("SELECT * FROM features ORDER BY feature_id")->fetchAll(PDO::FETCH_ASSOC);
+        return $features;
+    } catch (PDOException $e) {
+        /* Return empty array if database connection fails */
+        return [];
+    }
+}
+
 /*-------------------- Function to fetch transfercode endpoint --------------------*/
 function checkTransferCode($bookingData)
 {
