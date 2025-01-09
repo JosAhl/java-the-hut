@@ -41,8 +41,8 @@ $features = getFeatures();
             <label for="room" class="select-input">Room</label>
             <select name="room" id="room" class="form-input">
                 <?php foreach ($rooms as $room): ?>
-                    <option value="<?php echo htmlspecialchars($room['room_id']); ?>">
-                        <?php echo htmlspecialchars($room['room_type']); ?> | <?php echo htmlspecialchars($room['price_per_night']); ?>/night
+                    <option value="<?= htmlspecialchars($room['room_id']); ?>" data-price="<?= $room['price_per_night'] ?>">
+                        <?= htmlspecialchars($room['room_type']); ?> | <?= htmlspecialchars($room['price_per_night']); ?>/night
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -51,12 +51,16 @@ $features = getFeatures();
         <section class="feature-box">
             <?php foreach ($features as $feature): ?>
                 <div class="box">
-                    <input type="checkbox" name="features[]" class="form-input" value="<?php echo htmlspecialchars($feature['feature_id']); ?>">
-                    <?php echo htmlspecialchars($feature['price']); ?>
+                    <input type="checkbox" name="features[]" class="form-input" value="<?= htmlspecialchars($feature['feature_id']); ?>" data-price="<?= $feature['price'] ?>">
+                    <?= htmlspecialchars($feature['price']); ?>
                     <img src="./assets/coin.png" alt="Coin" class="cost-img">
-                    <?php echo htmlspecialchars($feature['feature_name']); ?>
+                    <?= htmlspecialchars($feature['feature_name']); ?>
                 </div>
             <?php endforeach; ?>
+        </section>
+
+        <section class="total-cost">
+            <h3>Total Cost: <span id="total-cost">0 coins</span></h3>
         </section>
 
         <input type="hidden" name="response_format" value="json">
