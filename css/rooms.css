@@ -12,6 +12,11 @@
     width: 20rem;
 }
 
+.room-info img:hover {
+    width: 21rem;
+    transition: 0.5s;
+}
+
 .room-info h3 {
     font-family: var(--font-family-title);
     font-size: var(--font-size-l);

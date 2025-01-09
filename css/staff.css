@@ -6,11 +6,19 @@
 .staff-info {
     display: flex;
     align-items: center;
+    justify-items: center;
     gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+.staff-info .staff-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .staff-info img {
-    width: 10rem;
+    width: 15rem;
     border-radius: 50%;
 }
 
