@@ -1,0 +1,23 @@
+.staff {
+    display: flex;
+    flex-direction: column;
+}
+
+.staff-info {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.staff-info img {
+    width: 10rem;
+    border-radius: 50%;
+}
+
+.staff h3 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-l);
+    color: var(--color-white);
+    text-align: center;
+    margin: 1rem 0 0;
+}

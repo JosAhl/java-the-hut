@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="./css/rooms.css">
     <link rel="stylesheet" type="text/css" href="./css/calendar.css">
     <link rel="stylesheet" type="text/css" href="./css/features.css">
+    <link rel="stylesheet" type="text/css" href="./css/staff.css">
     <link rel="stylesheet" type="text/css" href="./css/footer.css">
 </head>
 
@@ -28,6 +29,6 @@
         <nav>
             <a href="./index.php">Hotel</a>
             <a href="./features.php">Features</a>
-            <a href="#">About</a>
+            <a href="./about.php">About</a>
         </nav>
     </header>
