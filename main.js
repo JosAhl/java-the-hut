@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /*--- Function to calculate total cost ----*/
     function updateTotalCost() {
         const roomOption = roomSelect.selectedOptions[0];
-        const roomPricePerNight = parseInt(roomOption.getAttribute('data-price'));
+        const roomPricePerDay = parseInt(roomOption.getAttribute('data-price'));
         const selectedFeatures = Array.from(featuresCheckboxes).filter(checkbox => checkbox.checked);
 
         /*--- Calculate total cost of selected feature prices ---*/
@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const arrival = arrivalInput.value;
         const departure = departureInput.value;
 
-        if (arrival && departure && roomPricePerNight) {
+        if (arrival && departure && roomPricePerDay) {
             /*--- Calculate the number of days ---*/
             const days = calculateDateDifference(arrival, departure);
             if (days > 0) {
-                const roomTotal = roomPricePerNight * days;
+                const roomTotal = roomPricePerDay * days;
                 const totalPrice = roomTotal + featurePrice;
 
                 /*--- Display total cost ---*/

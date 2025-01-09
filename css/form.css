@@ -46,6 +46,12 @@ label, .box {
     width: 1rem;
 }
 
+.total-cost {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-s);
+    color: var(--color-white);
+}
+
 /*--- Book button styling ---*/
 .book-button {
     font-family: var(--font-family-title);
