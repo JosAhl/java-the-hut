@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $db = new PDO('sqlite:../database/yrgopelago-tatooine.db');
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $stmt = $db->prepare("UPDATE rooms SET price_per_night = :price WHERE room_id = :id");
+                $stmt = $db->prepare("UPDATE rooms SET price_per_day = :price WHERE room_id = :id");
                 $stmt->execute([
                     ':price' => $_POST['price'],
                     ':id' => $_POST['room_id']
@@ -111,11 +111,11 @@ if ($access_granted) {
                     <?php foreach ($rooms as $room): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($room['room_type']); ?></td>
-                            <td>$<?php echo htmlspecialchars($room['price_per_night']); ?></td>
+                            <td>$<?php echo htmlspecialchars($room['price_per_day']); ?></td>
                             <td>
                                 <form method="POST">
                                     <input type="hidden" name="room_id" value="<?php echo $room['room_id']; ?>">
-                                    <input type="number" name="price" step="1" value="<?php echo $room['price_per_night']; ?>" required>
+                                    <input type="number" name="price" step="1" value="<?php echo $room['price_per_day']; ?>" required>
                                     <button type="submit" name="update_room">Update</button>
                                 </form>
                             </td>

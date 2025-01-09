@@ -41,8 +41,8 @@ $features = getFeatures();
             <label for="room" class="select-input">Room</label>
             <select name="room" id="room" class="form-input">
                 <?php foreach ($rooms as $room): ?>
-                    <option value="<?= htmlspecialchars($room['room_id']); ?>" data-price="<?= $room['price_per_night'] ?>">
-                        <?= htmlspecialchars($room['room_type']); ?> | <?= htmlspecialchars($room['price_per_night']); ?>/night
+                    <option value="<?= htmlspecialchars($room['room_id']); ?>" data-price="<?= $room['price_per_day'] ?>">
+                        <?= htmlspecialchars($room['room_type']); ?> | <?= htmlspecialchars($room['price_per_day']); ?>/day
                     </option>
                 <?php endforeach; ?>
             </select>
