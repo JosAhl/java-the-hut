@@ -7,13 +7,17 @@ $features = getFeatures();
 ?>
 
 <section class="welcome">
+    <img src="./assets/tatooine.png" alt="Tatooine planet" class="planet">
 
-    <h2>Welcome to Java the Hut</h2>
+    <h2>Welcome to<br>Java the Hut</h2>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Nestled amidst the vast sand dunes, we <br>
+        invite you to embark on unforgettable <br>
+        adventures. Whether you’re seeking the <br>
+        thrill of the desert or a peaceful retreat <br>
+        under the twin suns, our hotel offers <br>
+        a unique blend of comfort <br>
+        and exploration.
     </p>
 
 </section>

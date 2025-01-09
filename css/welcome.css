@@ -1,16 +1,29 @@
 .welcome {
     text-align: center;
     color: var(--color-white);
+    position: relative;  /* This is needed for absolute positioning of text */
+}
+
+.planet {
+    width: 25rem;
+    border-radius: 50%;
+    margin: 1rem;
+}
+
+.welcome h2, .welcome p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);  /* Centers the text horizontally */
+    z-index: 1;  /* Text above image */
 }
 
 .welcome h2 {
     font-family: var(--font-family-title);
+    top: 15%;
 }
 
 .welcome p {
     font-family: var(--font-family-text);
-}
-
-.welcome img {
-    width: 100%;
+    top: 38%;  /* Adjust this value to position the paragraph */
+    max-width: 80%;  /* Prevents text from being too wide */
 }
