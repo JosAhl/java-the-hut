@@ -42,7 +42,7 @@ function calculateTotalPrice($database, $room, $arrival, $departure, $features)
 
     /*--- Calculate room price ---*/
     $roomPriceQuery = $database->prepare('
-        SELECT price_per_night * (julianday(:departure) - julianday(:arrival)) as room_price
+        SELECT price_per_night * (julianday(:departure) - julianday(:arrival)) + 1 as room_price
         FROM rooms 
         WHERE room_id = :room_id
     ');

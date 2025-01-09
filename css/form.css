@@ -14,7 +14,7 @@ label, .box {
     font-family: var(--font-family-text);
 }
 
-.form-title, .form-guest, .dates, .form-room {
+.form-title, .form-guest, .dates, .form-room, .total-cost {
     text-align: center;
     margin: 1rem;
 }
@@ -51,4 +51,5 @@ label, .box {
     font-family: var(--font-family-title);
     font-size: var(--font-size-m);
     text-align: center;
+    margin-bottom: 1rem;
 }
