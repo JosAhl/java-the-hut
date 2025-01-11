@@ -1,0 +1,71 @@
+/*--- Header index.php ---*/
+h1 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-xxl);
+    margin: 0;
+}
+
+/*--- Welcome text index.php ---*/
+.welcome h2, .welcome p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);  /* Centers the text horizontally */
+    z-index: 1;  /* Text above image */
+}
+
+.welcome h2 {
+    font-family: var(--font-family-title);
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.welcome p {
+    font-family: var(--font-family-text);
+    top: 38%;
+    max-width: 80%;
+}
+
+/*--- Room info index.php ---*/
+.room-info h3 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-l);
+    color: var(--color-white);
+    text-align: center;
+    margin: 1rem 0 0;
+}
+
+.room-info p {
+    font-family: var(--font-family-text);
+    color: var(--color-white);
+}
+
+/*--- Feature info features.php ---*/
+.feature-info h3 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-l);
+    color: var(--color-white);
+    text-align: center;
+    margin: 1rem 0 0;
+}
+
+.feature-info p {
+    font-family: var(--font-family-text);
+    color: var(--color-white);
+}
+
+/*--- Staff info about.php ---*/
+.staff h3 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-l);
+    color: var(--color-white);
+    text-align: center;
+    margin: 1rem 0 0;
+}
+
+.staff p {
+    font-family: var(--font-family-text);
+    color: var(--color-white);
+}
