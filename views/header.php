@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="./css/features.css">
     <link rel="stylesheet" type="text/css" href="./css/staff.css">
     <link rel="stylesheet" type="text/css" href="./css/footer.css">
+    <link rel="stylesheet" type="text/css" href="./css/typography.css">
 </head>
 
 <body>
